@@ -1,6 +1,7 @@
 from os import system
 system('cls')
 import logging
+import argparse
 
 FORMAT = '{levelname:<8} - время записи: {asctime}, строка срабатывания: {lineno:02d}, {msg}'
 logging.basicConfig(format=FORMAT, filename='logger_student.log', 
@@ -45,11 +46,20 @@ class Student:
         self._surname = _surname
         logger.info(f"в базу внесен студент - {_name} {_surname}")
 
+def parser():
+    pars = argparse.ArgumentParser(prog='Student()')
+    pars.add_argument('-n', default='Ден')
+    pars.add_argument('-s', default='Браун')        
+    args = pars.parse_args()
+    return Student(args.n.capitalize(), args.s.capitalize())
+
 if __name__ == "__main__":
     st1 = Student('Макс', 'Петров')
     st2 = Student('Вася', 'Пупкин')
     st4 = Student('Джон', 'Траволта')
     # st3 = Student('ваня', 'Сидоров')
     # st5 = Student('Мак1', 'Петров')
+
+    parser()
 
 
